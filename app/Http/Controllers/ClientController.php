@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Brand;
+use App\models\Client;
 use Illuminate\Http\Request;
 
-class BrandController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
-        $brands=Brand::all();
-        return view('admin.brands.index',compact('brands'));
+        $clients=Client::all();
+        return view('admin.clients.index',compact('clients'));
     }
 
     /**
@@ -26,7 +25,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brands.create');
+       return view('admin.clients.create');
     }
 
     /**
@@ -39,25 +38,28 @@ class BrandController extends Controller
     {
         $request->validate([
             'name' => 'required',
-
-
+            'email' => 'required',
+            'primary_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'company_name' => 'required',
         ]);
         //
         $input=$request->all();
 
-        $brands=new Brand();
-        $brands->create($input);
+        $clients=new Client();
+        $clients->create($input);
 
-        return redirect('/admin/brands')->with('message', 'Record Added');
+        return redirect('/admin/clients')->with('message', 'Record Added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Brand  $brand
+     * @param  \App\models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show(Client $client)
     {
         //
     }
@@ -65,48 +67,53 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Brand  $brand
+     * @param  \App\models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $brand = Brand::findOrFail($id);
-        return view('admin.brands.edit',compact('brand'));
+        $client = Client::findOrFail($id);
+        return view('admin.clients.edit',compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Brand  $brand
+     * @param  \App\models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'name' => 'required',
+            'email' => 'required',
+            'primary_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'company_name' => 'required',
 
         ]);
-
         $input=$request->all();
 
 
-        Brand::whereId($id)->first()->update($input);
+        Client::whereId($id)->first()->update($input);
 
-        return redirect('/admin/brands')->with('message', 'Record Updated');
+        return redirect('/admin/clients')->with('message', 'Record Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Brand  $brand
+     * @param  \App\models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $brands = Brand::findOrFail($id);
-        $brands->delete();
+        $client = Client::findOrFail($id);
+        $client->delete();
 
-        return redirect('/admin/brands')->with('del_message', 'Record Deleted');
+        return redirect('/admin/clients')->with('del_message', 'Record Deleted');
     }
 }

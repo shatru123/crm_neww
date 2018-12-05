@@ -10,6 +10,23 @@
                  <a class="menu-icon mdi mdi-plus-circle" href="{{route('products.create')}}">Add new</a>
                     {{--<code>.table-striped</code>--}}
                 </p>
+                <script>
+                    setTimeout(function() {
+                        $('#success').fadeOut('fast');
+                    }, 3000);
+                </script>
+
+                @if(session()->has('message'))
+                    <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;" id="success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
+                @if(session()->has('del_message'))
+                    <div class="alert alert-danger alert-dismissable custom-success-box" style="margin: 15px;" id="success">
+                        {{ session()->get('del_message') }}
+                    </div>
+                @endif
    <div class="table-responsive">
  <table class="table table-striped">
         <thead>

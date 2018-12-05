@@ -5,9 +5,9 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Brand Table</h4>
+                <h4 class="card-title">Clients Table</h4>
                 <p class="card-description">
-                    <a class="menu-icon mdi mdi-plus-circle" href="{{route('brands.create')}}">Add new</a>
+                    <a class="menu-icon mdi mdi-plus-circle" href="{{route('clients.create')}}">Add new</a>
                     {{--<code>.table-striped</code>--}}
                 </p>
                 <script>
@@ -33,24 +33,28 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Address</th>
+                            <th>Mobile</th>
+                            <th>Alt Mobile</th>
+                            <th>Company</th>
                             <th>Created</th>
                             <th>Updated</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @if($brands)
+                        @if($clients)
 
-
-                            @foreach($brands as $brand)
-
-
+                            @foreach($clients as $client)
                                 <tr>
-                                    <td>{{$brand->id}}</td>
-
-                                    <td><a href="{{route('brands.edit',$brand->id)}}">{{$brand->name}}</a></td>
-                                    <td>{{$brand->created_at->diffForHumans()}}</td>
-                                    <td>{{$brand->updated_at->diffForHumans()}}</td>
+                                    <td>{{$client->id}}</td>
+                                    <td><a href="{{route('clients.edit',$client->id)}}">{{$client->name}}</a></td>
+                                    <td>{!!html_entity_decode($client->address)!!}</td>
+                                    <td>{{$client->primary_number}}</td>
+                                    <td>{{$client->secondary_number}}</td>
+                                    <td>{{$client->company_name}}</td>
+                                    <td>{{$client->created_at->diffForHumans()}}</td>
+                                    <td>{{$client->updated_at->diffForHumans()}}</td>
                                 </tr>
 
                             @endforeach
@@ -62,7 +66,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 

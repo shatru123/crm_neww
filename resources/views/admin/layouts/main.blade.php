@@ -132,6 +132,12 @@
                         <span class="menu-title">Brands</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('clients.index')}}">
+                        <i class="menu-icon mdi mdi-nature-people"></i>
+                        <span class="menu-title">Clients</span>
+                    </a>
+                </li>
 
             </ul>
         </nav>

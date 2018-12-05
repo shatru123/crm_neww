@@ -37,8 +37,8 @@ class LeadController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'mobile' => 'required|min:10',
-            'alt_mobile' => 'required|min:10',
+            'mobile' => 'required|min:10|max:10',
+            'alt_mobile' => 'required|min:10|max:10',
             'address' => 'required',
         
         ]);
@@ -48,7 +48,7 @@ class LeadController extends Controller
          $leads=new Lead();
         $leads->create($input);
 
-        return redirect('/admin/leads');
+        return redirect('/admin/leads')->with('message', 'Record Added');
 
 
 
@@ -61,15 +61,14 @@ class LeadController extends Controller
         //
     }
 
-    
 
 
     public function update(Request $request,$id)
     {
         $request->validate([
             'name' => 'required',
-            'mobile' => 'required|min:10',
-            'alt_mobile' => 'required|min:10',
+            'mobile' => 'required|min:10|max:10',
+            'alt_mobile' => 'required|min:10|max:10',
             'address' => 'required',
 
         ]);
@@ -79,7 +78,7 @@ class LeadController extends Controller
 
         Lead::whereId($id)->first()->update($input);
 
-        return redirect('/admin/leads');
+        return redirect('/admin/leads')->with('message', 'Record Updated');
     }
 
     
@@ -91,7 +90,7 @@ class LeadController extends Controller
 
         $leads->delete();
 
-        return redirect('/admin/leads');
+        return redirect('/admin/leads')->with('del_message', 'Record Deleted');
     }
 
 }

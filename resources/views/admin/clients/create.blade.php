@@ -4,33 +4,27 @@
     <div class="col-lg-10 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                {!! Form::open(['method'=>'POST', 'action'=> 'ClientController@store','files'=>true]) !!}
 
-
-
-
-                {!! Form::model($lead, ['method'=>'PATCH', 'action'=> ['LeadController@update', $lead->id],'files'=>true]) !!}
-
-                <h1>Update  Lead</h1>
-
-                @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
+                <h1>Client:</h1>
                 <div class="form-group">
                     {!! Form::label('name', 'Name:') !!}
                     {!! Form::text('name', null, ['class'=>'form-control'])!!}
                 </div>
 
-
                 <div class="form-group">
-                    {!! Form::label('mobile', 'Mobile:') !!}
-                    {!! Form::text('mobile', null, ['class'=>'form-control'])!!}
+                    {!! Form::label('email', 'Email:') !!}
+                    {!! Form::email('email', null, ['class'=>'form-control'])!!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('alt_mobile', 'Alternate Mobile:') !!}
-                    {!! Form::text('alt_mobile', null, ['class'=>'form-control'])!!}
+                    {!! Form::label('primary_number', 'Mobile:') !!}
+                    {!! Form::text('primary_number', null, ['class'=>'form-control'])!!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('secondary_number', 'Alternate Mobile:') !!}
+                    {!! Form::text('secondary_number', null, ['class'=>'form-control'])!!}
                 </div>
 
                 <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
@@ -49,29 +43,24 @@
                         } );
                 </script>
 
-                <h3><u>Requirements</u></h3>
-
                 <div class="form-group">
-                    {!! Form::label('type', ' Type:') !!}
-                    {!! Form::select('type', array(0=>'Product',1 => 'Service',) , 0, ['class'=>'form-control'])!!}
+                    {!! Form::label('zipcode', 'Zipcode:') !!}
+                    {!! Form::text('zipcode', null, ['class'=>'form-control'])!!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('assigned_to', 'Assign To:') !!}
-                    {!! Form::select('assigned_to', $users, null,['class'=>'form-control'] ) !!}
+                    {!! Form::label('city', 'City:') !!}
+                    {!! Form::text('city', null, ['class'=>'form-control'])!!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::submit('Update Lead', ['class'=>'btn btn-primary col-sm-6']) !!}
+                    {!! Form::label('company_name', 'Company Name:') !!}
+                    {!! Form::text('company_name', null, ['class'=>'form-control'])!!}
                 </div>
 
-                {!! Form::close() !!}
-
-
-                {!! Form::open(['method'=>'DELETE', 'action'=> ['LeadController@destroy', $lead->id]]) !!}
 
                 <div class="form-group">
-                    {!! Form::submit('Delete Lead ', ['class'=>'btn btn-danger col-sm-6']) !!}
+                    {!! Form::submit('Add Client Details', ['class'=>'btn btn-primary']) !!}
                 </div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -87,5 +76,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

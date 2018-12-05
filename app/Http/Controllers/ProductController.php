@@ -52,7 +52,7 @@ class ProductController extends Controller
         $products=new Product();
         $products->create($input);
 
-        return redirect('/admin/products');
+        return redirect('/admin/products')->with('message', 'Record Added');
     }
 
     /**
@@ -100,7 +100,7 @@ class ProductController extends Controller
 
         Product::whereId($id)->first()->update($input);
 
-        return redirect('/admin/products');
+        return redirect('/admin/products')->with('message', 'Record Updated');
     }
 
     /**
@@ -116,6 +116,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect('/admin/products');
+        return redirect('/admin/products')->with('del_message', 'Record Deleted');
     }
 }
