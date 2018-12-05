@@ -39,7 +39,7 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'primary_number' => 'required',
+            'primary_number' => 'required|min:10|max:10',
             'address' => 'required',
             'city' => 'required',
             'company_name' => 'required',
@@ -89,7 +89,7 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'primary_number' => 'required',
+            'primary_number' => 'required|min:10|max:10',
             'address' => 'required',
             'city' => 'required',
             'company_name' => 'required',

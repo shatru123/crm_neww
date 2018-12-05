@@ -13,4 +13,9 @@ class Lead extends Model
     {
         return $this->belongsTo('App\User','assigned_to');
     }
+
+    public function requirement()
+    {
+        return $this->hasMany('App\models\Requirement');
+    }
 }

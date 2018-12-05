@@ -21,12 +21,12 @@
 
                 <div class="form-group">
                     {!! Form::label('primary_number', 'Mobile:') !!}
-                    {!! Form::text('primary_number', null, ['class'=>'form-control'])!!}
+                    {!! Form::number('primary_number', null, ['class'=>'form-control'])!!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('secondary_number', 'Alternate Mobile:') !!}
-                    {!! Form::text('secondary_number', null, ['class'=>'form-control'])!!}
+                    {!! Form::number('secondary_number', null, ['class'=>'form-control'])!!}
                 </div>
 
                 <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>

@@ -10,82 +10,222 @@
 
                 {!! Form::model($lead, ['method'=>'PATCH', 'action'=> ['LeadController@update', $lead->id],'files'=>true]) !!}
 
-                <h1>Update  Lead</h1>
 
-                @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                <div class="card text-left">
+                    <div class="card-header">
+                        Lead Details
                     </div>
-                @endif
-                <div class="form-group">
-                    {!! Form::label('name', 'Name:') !!}
-                    {!! Form::text('name', null, ['class'=>'form-control'])!!}
-                </div>
+
+                    <div class="card-body  text-left">
+                        <div class="row">
+                           <div class="col-md-2">
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Name:</li>
+                                    <li class="list-group-item">Mobile:</li>
+                                    <li class="list-group-item">Alternate Mobile:</li>
+                                    <li class="list-group-item">Address:</li>
+
+                                    <li class="list-group-item">Assign To:</li>
+                                </ul>
+
+                           </div>
+                            <div class="col-md-8">
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{$lead->name}}</li>
+                                <li class="list-group-item">{{$lead->mobile}}</li>
+                                <li class="list-group-item">{{$lead->alt_mobile}}</li>
+                                <li class="list-group-item">{!!html_entity_decode($lead->address)!!}</li>
+
+                                <li class="list-group-item">{{$lead->user->name}}</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        {!! Form::close() !!}
+
+                        {{--{!! Form::submit('Update Lead ', ['class'=>'btn btn-primary col-sm-2']) !!}--}}
+                        <div class="card text-left">
+                            <div class="card-header">
+                              <h5>Requirements</h5>
+                                <ul class="nav nav-tabs">
+                                    <li><a data-toggle="tab" href="#product">Products</a></li>
+                                    &nbsp
+                                    <li><a data-toggle="tab" href="#service">Services</a></li>
+
+                                </ul>
+                            </div>
+
+                                <div class="tab-content">
+                                    {{---------------------------------------------}}
+                                    <script>
+                                        setTimeout(function() {
+                                            $('#success').fadeOut('fast');
+                                        }, 1000);
+                                    </script>
+
+                                    @if(session()->has('message'))
+                                        <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;" id="success">
+                                            {{ session()->get('message') }}
+                                        </div>
+                                    @endif
+
+                                    @if(session()->has('del_message'))
+                                        <div class="alert alert-danger alert-dismissable custom-success-box" style="margin: 15px;" id="success">
+                                            {{ session()->get('del_message') }}
+                                        </div>
+                                    @endif
 
 
-                <div class="form-group">
-                    {!! Form::label('mobile', 'Mobile:') !!}
-                    {!! Form::text('mobile', null, ['class'=>'form-control'])!!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('alt_mobile', 'Alternate Mobile:') !!}
-                    {!! Form::text('alt_mobile', null, ['class'=>'form-control'])!!}
-                </div>
-
-                <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
-                <div class="form-group">
-                    {!! Form::label('body', 'Address:') !!}
-                    {!! Form::textarea('address', null, ['class'=>'form-control','id'=>'address'])!!}
-                </div>
-                <script>
-                    ClassicEditor
-                        .create( document.querySelector( '#address' ) )
-                        .then( editor => {
-                            console.log( editor );
-                        } )
-                        .catch( error => {
-                            console.error( error );
-                        } );
-                </script>
-
-                <h3><u>Requirements</u></h3>
-
-                <div class="form-group">
-                    {!! Form::label('type', ' Type:') !!}
-                    {!! Form::select('type', array(0=>'Product',1 => 'Service',) , 0, ['class'=>'form-control'])!!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('assigned_to', 'Assign To:') !!}
-                    {!! Form::select('assigned_to', $users, null,['class'=>'form-control'] ) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::submit('Update Lead', ['class'=>'btn btn-primary col-sm-6']) !!}
-                </div>
-
-                {!! Form::close() !!}
+                                    {{----------------------------------------------------}}
+                                    <div id="product" class="tab-pane fade in active">
+                                        {{--<h3>Products</h3>--}}
+                                        <p>
+                                        <div class="col-lg-6 stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Products</h4>
 
 
-                {!! Form::open(['method'=>'DELETE', 'action'=> ['LeadController@destroy', $lead->id]]) !!}
 
-                <div class="form-group">
-                    {!! Form::submit('Delete Lead ', ['class'=>'btn btn-danger col-sm-6']) !!}
-                </div>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                                                    <p class="card-description">
+                                                    {!! Form::open(['method'=>'POST', 'action'=> 'RequirementController@store','files'=>true]) !!}
+                                                        <div class="form-group">
 
-                {!! Form::close() !!}
-            </div>
-        </div>
+                                                                <input type="hidden" value="{{$lead->id}}" name="lead_id">
+                                                            <input type="hidden" value="0" name="type">
+
+                                                            <label for="title">Title</label>
+                                                            <div class="form-group">
+                                                                <div id="div">
+                                                                    <button onclick ="appendRow1()" value="Add Row"><i class="menu-icon mdi mdi-plus-box primary"></i> </button>
+                                                                </div>
+                                                            </div>
+
+                                                            {!! Form::text('product_or_service_id', null, ['class'=>'form-control'])!!}
+
+                                                        </div>
+
+                                                    {!! Form::submit('Add Requirements', ['class'=>'btn btn-success']) !!}
+
+                                                    @if ($errors->any())
+                                                        <div class="alert alert-danger">
+                                                            <ul>
+                                                                @foreach ($errors->all() as $error)
+                                                                    <li>{{ $error }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                    {!! Form::close() !!}
+                                        <script>
+                                            var x=1
+                                            function appendRow1()
+                                            {
+                                                var d = document.getElementById('div');
+                                                d.innerHTML += "<input type='text' name='product_or_service_id' id='tst"+ x++ +"' class='form-control' placeholder='Add New Product'><br>";
+                                            }
+                                        </script>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </p>
+                                    <div id="service" class="tab-pane fade">
+
+                                        <p>
+                                            <div class="col-lg-6 stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Services</h4>
+
+                                                {{---------------------------------------------}}
+                                                        <script>
+                                                            setTimeout(function() {
+                                                                $('#success').fadeOut('fast');
+                                                            }, 1000);
+                                                        </script>
+
+                                                        @if(session()->has('message'))
+                                                            <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;" id="success">
+                                                                {{ session()->get('message') }}
+                                                            </div>
+                                                        @endif
+
+                                                        @if(session()->has('del_message'))
+                                                            <div class="alert alert-danger alert-dismissable custom-success-box" style="margin: 15px;" id="success">
+                                                                {{ session()->get('del_message') }}
+                                                            </div>
+                                        @endif
+
+
+                                        {{----------------------------------------------------}}
+
+
+
+                                        <p class="card-description">
+                                        {!! Form::open(['method'=>'POST', 'action'=> 'RequirementController@store','files'=>true]) !!}
+                                        <div class="form-group">
+
+                                            <input type="hidden" value="{{$lead->id}}" name="lead_id">
+                                            <input type="hidden" value="1" name="type">
+
+                                            <label for="title">Title</label>
+                                            <div class="form-group">
+                                                <div id="div1">
+                                                    <button onclick ="appendRow()" value="Add Row"><i class="menu-icon mdi mdi-plus-box primary"></i> </button>
+                                                </div>
+                                            </div>
+
+                                    {!! Form::text('product_or_service_id', null, ['class'=>'form-control'])!!}
+
+
+                                        </div>
+
+                                        {!! Form::submit('Add Requirements', ['class'=>'btn btn-success']) !!}
+
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        {!! Form::close() !!}
+
+                                        <script>
+                                            var x=1
+                                            function appendRow()
+                                            {
+                                                var d = document.getElementById('div1');
+                                                d.innerHTML += "<input type='text' name='product_or_service_id' id='tst"+ x++ +"' class='form-control' placeholder='Add New Service' ><br>";
+                                            }
+                                        </script>
+
+                                                    </div>
+                                                </div>
+                                        </div>
+
+
+                                      </p>
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+
+               </div>
+
+    <div class="card-footer text-muted">
     </div>
+
+    </div>
+
+
 
 @endsection

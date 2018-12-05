@@ -24,7 +24,7 @@ class RequirementController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +35,13 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input=$request->all();
+
+        $requirements=new Requirement();
+        $requirements->create($input);
+
+//        return redirect('/admin/leads')->with('message', 'Record Updated');
+        return redirect()->back()->with('message', 'Requirement Updated');
     }
 
     /**
