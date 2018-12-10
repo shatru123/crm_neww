@@ -77,6 +77,7 @@ class LeadController extends Controller
       
 
         Lead::whereId($id)->first()->update($input);
+//        return response()->json(['success'=>'Leads Updated.']);
 
         return redirect('/admin/leads')->with('message', 'Record Updated');
     }

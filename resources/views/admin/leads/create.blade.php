@@ -12,7 +12,6 @@
                  {!! Form::text('name', null, ['class'=>'form-control'])!!}
            </div>
 
-
            <div class="form-group">
             {!! Form::label('mobile', 'Mobile:') !!}
             {!! Form::text('mobile', null, ['class'=>'form-control'])!!}

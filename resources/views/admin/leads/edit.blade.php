@@ -10,7 +10,7 @@
 
                 {!! Form::model($lead, ['method'=>'PATCH', 'action'=> ['LeadController@update', $lead->id],'files'=>true]) !!}
 
-
+                    @csrf
                 <div class="card text-left">
                     <div class="card-header">
                         Lead Details
@@ -18,41 +18,49 @@
 
                     <div class="card-body  text-left">
                         <div class="row">
-                           <div class="col-md-2">
+                           <div class="col-md-2 ">
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Name:</li>
+                                    <br>
                                     <li class="list-group-item">Mobile:</li>
+                                    <br>
                                     <li class="list-group-item">Alternate Mobile:</li>
+                                    <br>
                                     <li class="list-group-item">Address:</li>
-
+                                    <br>
                                     <li class="list-group-item">Assign To:</li>
                                 </ul>
 
                            </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 ">
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item">{{$lead->name}}</li>
-                                <li class="list-group-item">{{$lead->mobile}}</li>
-                                <li class="list-group-item">{{$lead->alt_mobile}}</li>
-                                <li class="list-group-item">{!!html_entity_decode($lead->address)!!}</li>
+                                   <li class="list-group-item"> {!! Form::text('name', null, ['class'=>'form-control'])!!}</li>
+                                    <li class="list-group-item"> {!! Form::text('mobile', null, ['class'=>'form-control'])!!}</li>
+                                      <li class="list-group-item">{!! Form::text('alt_mobile', null, ['class'=>'form-control'])!!}</li>
+                                     {{--<li class="list-group-item">{!!html_entity_decode($lead->address)!!}</li>--}}
+                                     <li class="list-group-item">{!! Form::textarea('address', null, ['class'=>'form-control','id'=>'address' , 'rows'=>'1'])!!}</li>
 
-                                <li class="list-group-item">{{$lead->user->name}}</li>
+                                       <li class="list-group-item">{!! Form::select('assigned_to', $users, null,['class'=>'form-control'] ) !!}</li>
                                 </ul>
                             </div>
-
                         </div>
-
+                        {!! Form::submit('Update', ['class'=>'btn btn-success']) !!}
+                        <br>
                         {!! Form::close() !!}
+                        <br>
+
+
+
 
                         {{--{!! Form::submit('Update Lead ', ['class'=>'btn btn-primary col-sm-2']) !!}--}}
                         <div class="card text-left">
                             <div class="card-header">
                               <h5>Requirements</h5>
                                 <ul class="nav nav-tabs">
-                                    <li><a data-toggle="tab" href="#product">Products</a></li>
+                                    <li><a data-toggle="tab" href="#product" class="btn btn-info">Products</a></li>
                                     &nbsp
-                                    <li><a data-toggle="tab" href="#service">Services</a></li>
+                                    <li><a data-toggle="tab" href="#service" class="btn btn-info">Services</a></li>
 
                                 </ul>
                             </div>
@@ -85,7 +93,7 @@
                                         <div class="col-lg-6 stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Products</h4>
+                                                    <h4 class="card-title active">Products</h4>
 
 
 
